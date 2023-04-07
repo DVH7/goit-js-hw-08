@@ -7,7 +7,7 @@ const STORAGE_KEY = 'feedback-form-state';
 
 const form = document.querySelector('.feedback-form');
 
-form.addEventListener('input', throttle(onInputData, 500));
+form.addEventListener('input', throttle(onInputData({ email, message }), 500));
 form.addEventListener('submit', onSubmitForm);
 
 let dataForm = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
