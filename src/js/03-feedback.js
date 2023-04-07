@@ -1,6 +1,6 @@
 import throttle from 'lodash.throttle'
 
-import { onInputData } from '../helpers/onInputData';
+// import { onInputData } from '../helpers/onInputData';
 import { onSubmitForm } from '../helpers/onSubmitForm';
 
 const STORAGE_KEY = 'feedback-form-state';
@@ -13,6 +13,11 @@ form.addEventListener('submit', onSubmitForm);
 let dataForm = JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
 const { email, message } = form.elements;
 reloadPage();
+
+function onInputData({ email, message }) {
+  dataForm = { email: email.value, message: message.value };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(dataForm));
+}
 
 function reloadPage() {
   if (dataForm) {
