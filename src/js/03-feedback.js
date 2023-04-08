@@ -1,8 +1,5 @@
 import throttle from 'lodash.throttle'
 
-// import { onInputData } from '../helpers/onInputData';
-import { onSubmitForm } from '../helpers/onSubmitForm';
-
 const STORAGE_KEY = 'feedback-form-state';
 
 const form = document.querySelector('.feedback-form');
@@ -17,6 +14,19 @@ reloadPage();
 function onInputData(evt) {
   dataForm = { email: email.value, message: message.value };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(dataForm));
+}
+function onSubmitForm(event) {
+  event.preventDefault();
+ 
+console.log({ email: email.value, message: message.value });
+
+  if (email.value === '' || message.value === '') {
+    return alert(`Будь ласка, заповніть всі обов'язкові поля.`);
+  }
+
+  localStorage.removeItem(STORAGE_KEY);
+  event.currentTarget.reset();
+  dataForm = {};
 }
 
 function reloadPage() {
